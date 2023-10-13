@@ -1,0 +1,27 @@
+<form [formGroup]="form">
+  <app-quote-input
+    [controlName]="'sentAmount'"
+    [parentFormGroup]="form"
+    [currency]="currenciesEnum.Eur"
+    placeholder="Send"></app-quote-input>
+  <app-quote-input
+    [controlName]="'receivedAmount'"
+    [parentFormGroup]="form"
+    [currency]="currenciesEnum.Usd"
+    placeholder="Receive"></app-quote-input>
+
+  <div class="rate">
+    <span>Rate: </span>
+    <div *ngIf="!(isLoading$ | async); else spinner" class="rate__value">
+      {{ rateValue }}
+    </div>
+    <ng-template #spinner>
+      <app-spinner></app-spinner>
+    </ng-template>
+  </div>
+
+  <div class="error">
+    <p *ngIf="expiredSoon$ | async">Period expires soon</p>
+    <p *ngIf="rateExpired">Rate expired. Updating...</p>
+  </div>
+</form>

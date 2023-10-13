@@ -1,0 +1,20 @@
+<div class="control" [formGroup]="parentFormGroup">
+  <input
+    decimalOnly
+    [formControlName]="controlName"
+    [placeholder]="placeholder"
+    id="input__{{ controlName }}__{{ id }}"
+    class="form__input"
+    type="text"
+    autocomplete="off"
+    inputmode="decimal" />
+  <label class="form__label" for="input__{{ controlName }}__{{ id }}">
+    {{ placeholder }}
+  </label>
+  <div class="currency">
+    {{ currency | uppercase }}
+  </div>
+</div>
+<div class="error">
+  <span *ngIf="parentFormGroup.get(controlName)?.invalid"> Invalid value </span>
+</div>
